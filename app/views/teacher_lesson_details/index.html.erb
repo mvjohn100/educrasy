@@ -27,7 +27,7 @@ Class View
       <% if @lesson %>
         <%= hidden_field_tag "code","#{@lesson.lesson.lessonName}" %>
         <% else %>
-        <%= hidden_field_tag "code"," " %>
+        <%= hidden_field_tag "code","O" %>
       <% end %>
     <%= hidden_field_tag "teacherid","#{current_user.id}" %>
     <%= submit_tag "add"%>

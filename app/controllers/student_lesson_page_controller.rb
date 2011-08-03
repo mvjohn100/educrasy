@@ -15,7 +15,7 @@ class StudentLessonPageController < ApplicationController
   end
 
   def result
-    @studentlesson=StudentLesson.find(:all)
+    @studentlesson=StudentLesson.where(:user_id=>"#{current_user.id}")
     @lesson_name=params[:lessonname]
     @class_name=params[:classname]
     @instructer=params[:instructer]
@@ -45,7 +45,6 @@ class StudentLessonPageController < ApplicationController
     @answer = Answer.new
     @lessonclass=LessonClass.find(:first,:conditions=>{:lesson_id=>"#{params[:lessonid]}"} )
     @studentlesson=StudentLesson.find(:first,:conditions=>{:lesson_id=>"#{params[:lessonid]}",:user_id=>"#{current_user.id}"} )
-    #@j=@studentlesson.finished
     @current=@studentlesson.finished
     @lessonclasslessonid=@lessonclass.lesson_id
     @lesson_name=@lessonclass.lesson.lessonName
@@ -150,7 +149,7 @@ class StudentLessonPageController < ApplicationController
              wrongans=[]
              @ans2=@ans
              @correct=0
-            @ans.each do | answer|
+             @ans.each do | answer|
                pass=0
                passtwo=0
                @choice=Choice.find(:first,:conditions=>{:id=>"#{Integer(answer)}"})
@@ -193,7 +192,7 @@ class StudentLessonPageController < ApplicationController
                     end
                     if j==@choice.size
                       @correct=@correct+1
-                     end
+                    end
                  end
               # For checking multiple correct answers for single question
               # to check if user clicked more options than that of correct answer
@@ -219,19 +218,25 @@ class StudentLessonPageController < ApplicationController
   end
 
    def performance
-    @correctanwerssize=0
-    @lessonclass=LessonClass.find(:first,:conditions=>{:lesson_id=>"#{params[:lessonid]}",:class_detail_id=>"#{params[:classdetailsid]}"} )
-    if @lessonclass
-    @lessonclasslessonid=@lessonclass.lesson_id
-    @lesson_name=@lessonclass.lesson.lessonName
-    @classname=@lessonclass.class_detail.classname
-    @classcode=@lessonclass.unique_classid
-    @instructer=User.find(:first,:conditions=>{:id=>"#{@lessonclass.teacherid}"})
-    @instructername=@instructer.name
-
-     @studentdetails=StudentDetail.where(:class_detail_id=>"#{params[:classdetailsid]}")
-     @lessonquestions=LessonPage.find_by_sql("select * from lesson_pages where lesson_id=#{@lessonclasslessonid} and questionnaire_id is not null")
-
-    end
+        @correctanwerssize=0
+        @lessonclass=LessonClass.find(:first,:conditions=>{:lesson_id=>"#{params[:lessonid]}",:class_detail_id=>"#{params[:classdetailsid]}"} )
+        if @lessonclass
+              @lessonclasslessonid=@lessonclass.lesson_id
+              @lesson_name=@lessonclass.lesson.lessonName
+              @classname=@lessonclass.class_detail.classname
+              @classcode=@lessonclass.unique_classid
+              @instructer=User.find(:first,:conditions=>{:id=>"#{@lessonclass.teacherid}"})
+              @instructername=@instructer.name
+              @classdetailsid=params[:classdetailsid]
+              @lessonid=params[:lessonid]
+              @studentdetails=StudentDetail.where(:class_detail_id=>"#{params[:classdetailsid]}")
+              @lessonquestions=LessonPage.find_by_sql("select * from lesson_pages where lesson_id=#{@lessonclasslessonid} and questionnaire_id is not null")
+        end
    end
+
+   def export
+     FasterCSV.open("./file.csv", "w") do |csv|
+        end
+     redirect_to(:action=>"performance",:lessonid=>"#{params[:lesson_id]}",:classdetailsid=>"#{params[:class_detail_id]}")
+    end
 end

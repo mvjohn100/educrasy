@@ -49,7 +49,9 @@ class StudentDetailsController < ApplicationController
         format.html { redirect_to(:controller =>"admin_people",:action =>"index") }
         format.xml  { render :xml => @student_detail, :status => :created, :location => @student_detail }
       else
-        format.html { render :action => "new" }
+        flash[:notice]="Student #{@student_detail.user.name} already assigned to the class #{@student_detail.class_detail.classname}"
+        #format.html { render :action => "new" }
+        format.html { redirect_to(:controller =>"admin_people",:action =>"index") }
         format.xml  { render :xml => @student_detail.errors, :status => :unprocessable_entity }
       end
     end

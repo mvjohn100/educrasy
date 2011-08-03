@@ -8,6 +8,7 @@ gem 'rails', '3.0.8'
 gem 'mysql2', '< 0.3'
 gem 'devise'
 gem 'cancan'
+gem 'fastercsv'
 group :development, :test do
 gem 'rspec-rails'
 end
