@@ -106,11 +106,11 @@
       </td>
       <%  while num<=@size %>
       <td>
-        <%  if (Integer(verticalright[i])) > 0 %>
-        <%=(Integer(verticalright[i])*100)/(Integer(verticalright[i]) + Integer(verticalwrong[i])) %>&nbsp; &permil;
-        <% elsif Integer(verticalright[i])==0 and Integer(verticalwrong[i])==0%>
+        <%  if ((verticalright[i]).to_i) > 0 %>
+        <%=((verticalright[i]).to_i*100)/((verticalright[i]).to_i + (verticalwrong[i]).to_i) %>&nbsp; &permil;
+        <% elsif (verticalright[i]).to_i==0 and (verticalwrong[i]).to_i==0%>
         -
-        <%elsif Integer(verticalright[i])==0%>
+        <%elsif (verticalright[i]).to_i==0%>
          0&nbsp; &permil;
         <% end %>
       </td>
