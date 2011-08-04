@@ -6,8 +6,8 @@
 </div>
 
 <div class="span-25 last">
-    <%  verticalright=[]%>
-    <%  verticalwrong=[]%>
+    <%  verticalright=Array.new %>
+    <%  verticalwrong=Array.new %>
   <table>
     <tr>
       <th>Students</th>
@@ -45,12 +45,13 @@
              <td></td>
             <%@ques=Quest.where(:questionnaire_id=>"#{quest.questionnaire.id}") %>
             <%@ques.each do | que | %>
+
                      <%@correctanwers=Choice.where(:quest_id=>"#{que.id}",:answer=>true)%>
                      <%#@correctanwerssize=@correctanwers.size%>
                      <%@answers=Answer.where(:user_id=>"#{student.user_id}",:questionnaire_id=>"#{que.questionnaire_id}")%>
                          <% if @answers.empty? %>
                             <td> -</td>
-                     <%else%>
+                        <%else%>
                                 <% corr=0 %>
                                     <%@correctanwers.each do |correct |%>
                                               <%@answers.each do | ans|%>
@@ -62,14 +63,14 @@
                                     <% if corr==Integer(@correctanwers.size)%>
                                       <td> &radic;</td>
                                       <%cor=cor+1%>
-                                      <%verticalright[m]=Integer(verticalright[m])+1%>
+                                       <%verticalright[m]=Integer(verticalright[m])+1%>
                                     <%else%>
                                        <td> &Chi;</td>
                                        <% wrong=wrong+1 %>
                                        <%verticalwrong[m]=Integer(verticalwrong[m])+1%>
                                     <%end%>
                                        <%m=m+1%>
-                        <%end %>
+                                     <%end %>
              <%end%>
         <% end %>
       <td>
