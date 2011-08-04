@@ -237,8 +237,8 @@ class StudentLessonPageController < ApplicationController
    end
 
    def export
-     FasterCSV.open("./file.csv", "w") do |csv|
-     end
-     redirect_to(:action=>"performance",:lessonid=>"#{params[:lesson_id]}",:classdetailsid=>"#{params[:class_detail_id]}")
+     #FasterCSV.open("./file.csv", "w") do |csv|
+     #end
+     #redirect_to(:action=>"performance",:lessonid=>"#{params[:lesson_id]}",:classdetailsid=>"#{params[:class_detail_id]}")
     end
 end
