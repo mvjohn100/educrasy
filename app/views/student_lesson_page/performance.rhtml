@@ -63,10 +63,18 @@
                                     <% if corr==Integer(@correctanwers.size)%>
                                       <td> &radic;</td>
                                       <%cor=cor+1%>
+                                      <% if verticalright[m]%>
+                                      <% else %>
+                                      <% verticalright[m]=0 %>
+                                      <% end %>
                                        <%verticalright[m]=Integer(verticalright[m])+1%>
                                     <%else%>
                                        <td> &Chi;</td>
                                        <% wrong=wrong+1 %>
+                                       <% if verticalwrong[m]%>
+                                      <% else %>
+                                      <% verticalwrong[m]=0 %>
+                                      <% end %>
                                        <%verticalwrong[m]=Integer(verticalwrong[m])+1%>
                                     <%end%>
                                        <%m=m+1%>
