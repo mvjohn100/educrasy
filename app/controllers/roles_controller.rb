@@ -75,6 +75,12 @@ class RolesController < ApplicationController
   # DELETE /roles/1.xml
   def destroy
     @role = Role.find(params[:id])
+    #to delete answers belongs to the particular user.
+    @answers=Answer.where(:user_id==@role.user_id)
+    @answers.each do |ans|
+      ans.destroy
+    end
+
     unless @role.user_id==1
     @user=User.find(@role.user_id)
     # deleting the link between lesson and user

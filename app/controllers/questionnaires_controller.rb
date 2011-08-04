@@ -80,6 +80,16 @@ class QuestionnairesController < ApplicationController
   def destroy
     @questionnaire = Questionnaire.find(params[:id])
 
+    @answers=Answer.where(:questionnaire_id==@questionnaire)
+    @answers.each do |ans|
+      ans.destroy
+    end
+
+    @lessonpage=LessonPage.where(:questionnaire_id==@questionnaire)
+    @lessonpage.each do |lessonpage|
+      lessonpage.destroy
+    end
+
     @choice=Choice.find(:all)
     @quest = Quest.find(:all,:conditions=>{:questionnaire_id=>@questionnaire.id})
     @quest.each do |quest |

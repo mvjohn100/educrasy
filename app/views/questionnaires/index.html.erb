@@ -16,7 +16,7 @@
     
     <td><%= link_to 'Show', questionnaire %></td>
     <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
-    <td><%= link_to 'Destroy', questionnaire, :confirm => 'Associated questions and question associated answers also will be deleated.Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', questionnaire, :confirm => 'Associated questions and question associated choices, user answer for this also will be deleated.Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -132,18 +132,18 @@ class StudentLessonPageController < ApplicationController
    end
 
    def answers
+        @pass=false
         @ans=params[:ans]
-        if @ans
+        @answercheck=Answer.where(:questionnaire_id=>params[:questionnaire_id],:user_id=>current_user.id)
+
+        if @ans and @answercheck.size==0
+              @pass=true
               @ans.each do |answer |
                   @answer=Answer.new
                   @answer.choice_id=answer
                   @answer.user_id=current_user.id
                   @answer.questionnaire_id=params[:questionnaire_id]
-                  if @answer.save
-                    @saved=true
-                  else
-                   @saved=false
-                  end
+                  @answer.save
               end
              questions=[]
              wrongans=[]
@@ -214,6 +214,8 @@ class StudentLessonPageController < ApplicationController
                  end
                # to check if user clicked more options than that of correct answer
           end
+    else
+      flash[:notice]="Already answerd for this"
     end
   end
 
@@ -236,7 +238,7 @@ class StudentLessonPageController < ApplicationController
 
    def export
      FasterCSV.open("./file.csv", "w") do |csv|
-        end
+     end
      redirect_to(:action=>"performance",:lessonid=>"#{params[:lesson_id]}",:classdetailsid=>"#{params[:class_detail_id]}")
     end
 end

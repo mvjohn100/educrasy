@@ -82,10 +82,12 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1.xml
   def destroy
     @lesson = Lesson.find(params[:id])
+
     @developers=Developer.find(:all,:conditions=>{:lessonID=>@lesson.id})
     @developers.each do | developer |
       developer.destroy
     end
+
     @developerslessons =DevelopersLessons.find(:all,:conditions=>{:lesson_id=>@lesson.id})
     @developerslessons.each do | deve |
       deve.destroy
@@ -95,6 +97,36 @@ class LessonsController < ApplicationController
     @lesson_page.each do |less |
       less.destroy
     end
+
+    @adminperson=AdminPerson.find(:all,:conditions=>{:lessonID=>@lesson.id})
+    @adminperson.each do |less |
+      less.destroy
+    end
+  @adminpeoplelessons=AdminPeopleLessons.find(:all,:conditions=>{:lesson_id=>@lesson.id})
+  @adminpeoplelessons.each do |less |
+      less.destroy
+    end
+
+  @lessonclass=LessonClass.find(:all,:conditions=>{:lesson_id=>@lesson.id})
+  @lessonclass.each do |less |
+      less.destroy
+  end
+
+   @studentlesson=StudentLesson.find(:all,:conditions=>{:lesson_id=>@lesson.id})
+   @studentlesson.each do |less |
+      less.destroy
+   end
+
+    @teacherdetails=TeacherDetail.find(:all,:conditions=>{:lessionID=>@lesson.id})
+    @teacherdetails.each do |less |
+      less.destroy
+   end
+
+    @teacherlesson=TeacherLesson.find(:all,:conditions=>{:lesson_id=>@lesson.id})
+    @teacherlesson.each do |less |
+      less.destroy
+   end
+
     @lesson.destroy
 
     respond_to do |format|
