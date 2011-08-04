@@ -10,11 +10,11 @@
         &nbsp;
       </div>
       <div class="span-19" id="video">
-       <%if @lessonpagesbrowse[Integer(@current)].content_info_id %>
-        <%@contentid= @lessonpagesbrowse[Integer(@current)].content_info_id %>
+       <%if @lessonpagesbrowse[(@current).to_i].content_info_id %>
+        <%@contentid= @lessonpagesbrowse[(@current).to_i].content_info_id %>
         <%=render 'data' %>
         <% else %>
-        <%@questionnaireid= @lessonpagesbrowse[Integer(@current)].questionnaire_id %>
+        <%@questionnaireid= @lessonpagesbrowse[(@current).to_i].questionnaire_id %>
         <%=render 'questionnaire'%>
         <% end %>
       </div>
