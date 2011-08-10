@@ -1,4 +1,5 @@
 class TeacherLessonDetailsController < ApplicationController
+ 
   def index
     @value=params[:id]
     @lessonclass= LessonClass.find(:all,:conditions=>{:lesson_id=>@value})

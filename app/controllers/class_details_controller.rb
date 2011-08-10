@@ -1,5 +1,5 @@
 class ClassDetailsController < ApplicationController
-  # GET /class_details
+    # GET /class_details
   # GET /class_details.xml
   def index
     @class_details = ClassDetail.all

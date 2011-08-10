@@ -4,10 +4,14 @@ class AdministratorsController < ApplicationController
   # GET /administrators
   # GET /administrators.xml
   def index
-
-    if current_user.role.name=='admin'
-    redirect_to(:controller => "admin_people",:action => "index")
-    return
+    if current_user.role
+      if current_user.role.name=='admin'
+        redirect_to(:controller => "admin_people",:action => "index")
+        return
+      end
+    else
+    flash[:notice]="Role not Assigned"
+    
     end
   #  @administrators = Administrator.all
 

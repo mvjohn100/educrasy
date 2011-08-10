@@ -1,4 +1,6 @@
 class StudentLessonPageController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource :except=> 'index'
   def index
   @studentlesson=StudentLesson.where(:user_id=>"#{current_user.id}")
   end
@@ -7,6 +9,11 @@ class StudentLessonPageController < ApplicationController
     if @lessonclass
     #flash[:notice]="Lesson #{@teacherlesson.lesson.lessonName} Added to #{@teacherlesson.user.name}'s list "
     @instructer=User.find(:first,:conditions=>{:id=>"#{@lessonclass.teacherid}"})
+    
+      @studentdetails=StudentDetail.new
+      @studentdetails.class_detail_id=@lessonclass.class_detail_id
+      @studentdetails.user_id=current_user.id
+      @studentdetails.save
     redirect_to(:action =>"result",:lessonname=>"#{@lessonclass.lesson.lessonName}",:classname=>"#{@lessonclass.class_detail.classname}",:instructer=>"#{@instructer.name}",:lessonid=>"#{@lessonclass.lesson.id}")
     else
       flash[:notice]="#{params[:code]} is not a valied code"

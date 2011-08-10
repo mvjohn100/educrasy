@@ -1,4 +1,5 @@
 class LessonPagesController < ApplicationController
+ 
   # GET /lesson_pages
   # GET /lesson_pages.xml
   def index

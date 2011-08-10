@@ -1,4 +1,5 @@
 class QuestsController < ApplicationController
+ 
   # GET /quests
   # GET /quests.xml
   def index

@@ -1,4 +1,6 @@
 class ContentInfosController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource 
   # GET /content_infos
   # GET /content_infos.xml
   def index

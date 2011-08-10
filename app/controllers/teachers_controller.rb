@@ -1,13 +1,17 @@
 class TeachersController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource :except=> 'index'
+  
   # GET /teachers
   # GET /teachers.xml
   def index
     @teachers = Teacher.all
+   if current_user.role
     if current_user.role.name=='teacher'
     redirect_to(:controller => "teacher_details",:action => "index")
     return
+    end
+   else
+     flash[:notice]="Role not Assigned"
+    
     end
 
     respond_to do |format|

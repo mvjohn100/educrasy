@@ -5,10 +5,16 @@ class ContentDevelopersController < ApplicationController
   # GET /content_developers
   # GET /content_developers.xml
   def index
+   if current_user.role 
     if current_user.role.name=='deve'
      redirect_to(:controller => "developers",:action =>"index")
-    return
+     return
     end
+   else
+     flash[:notice]="Role not Assigned"
+    
+    end
+    
     @content_developers = ContentDeveloper.all
 
     respond_to do |format|

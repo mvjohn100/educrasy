@@ -1,4 +1,5 @@
 class ChoicesController < ApplicationController
+  
   # GET /choices
   # GET /choices.xml
   def index

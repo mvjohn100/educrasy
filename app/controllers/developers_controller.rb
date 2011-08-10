@@ -1,4 +1,5 @@
 class DevelopersController < ApplicationController
+ 
   # GET /developers
   # GET /developers.xml
   def index

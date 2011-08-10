@@ -6,24 +6,19 @@ class Ability
     #
      user ||= User.new # guest user (not logged in)
 
-    if user.role.name=='admin'
-        can :manage, :all
-       
-      end
-       
-        if user.role=='student'
-           can :manage, [Student]
-
-        end
-        if user.role=='teacher'
-         can :manage, Teacher
-        end
-        if user.role.name=='deve'
-          can :manage, [ContentDeveloper,Lesson]
-          else
-          can :read, :all
-
-        end
+    if user.role
+      if user.role.name=='admin'
+          can :manage, :all
+      elsif user.role=='student'
+          can :manage, [Student,StudentLesson]
+      elsif user.role=='teacher'
+           can :manage, Teacher
+      elsif user.role.name=='deve'
+           can :manage, [ContentDeveloper,Lesson]
+      end     
+    else
+            can :read, :all
+    end
        
     #
     # The first argument to `can` is the action you are giving the user permission to do.

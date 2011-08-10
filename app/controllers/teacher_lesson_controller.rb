@@ -1,4 +1,5 @@
 class TeacherLessonController < ApplicationController
+  
   def add
     @teacherlesson=TeacherLesson.new
     @teacherlesson.lesson_id=params[:id]
