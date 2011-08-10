@@ -1,6 +1,4 @@
 class StudentLessonPageController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource :except=> 'index'
   def index
   @studentlesson=StudentLesson.where(:user_id=>"#{current_user.id}")
   end

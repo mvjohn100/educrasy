@@ -10,7 +10,7 @@ class Ability
       if user.role.name=='admin'
           can :manage, :all
       elsif user.role=='student'
-          can :manage, [Student,StudentLesson]
+          can :manage, [Student]
       elsif user.role=='teacher'
            can :manage, Teacher
       elsif user.role.name=='deve'
