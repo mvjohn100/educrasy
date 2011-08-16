@@ -47,7 +47,6 @@
             <%@ques.each do | que | %>
 
                      <%@correctanwers=Choice.where(:quest_id=>"#{que.id}",:answer=>true)%>
-                     <%#@correctanwerssize=@correctanwers.size%>
                      <%@answers=Answer.where(:user_id=>"#{student.user_id}",:questionnaire_id=>"#{que.questionnaire_id}")%>
                          <% if @answers.empty? %>
                             <td> -</td>
